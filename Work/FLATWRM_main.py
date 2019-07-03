@@ -4,6 +4,7 @@ from Time_and_flux import gettimeflux_1800
 import numpy as np
 
 
+
 hardcopy = False
 outfile = ""
 debug = False
@@ -16,7 +17,7 @@ period=0.
 degree=0
 fwhm = 0.
 
-ids = ['167602025']
+ids = ['167695269', '167602025', '167814740']
 for this_id in ids:
     time = gettimeflux_1800(this_id, '1')[0]
     flux = gettimeflux_1800(this_id, '1')[1]
@@ -49,13 +50,22 @@ for this_id in ids:
 
 
 
-fig, axs = plt.subplots(2)
-plt.clf()
-plt.scatter(time, flux)
-for t0,t1 in zip(istart,istop):
-	plt.scatter(time[t0:t1+1], flux[t0:t1+1])
-axs.plot(time, flux)
 
-#plt.scatter(time[istop1], flux[istop1])
-plt.xlim(1334,1336)
-plt.show()
+
+    plt.scatter(time, flux)
+    plt.show()
+
+    plt.scatter(time, flux)
+    for t0,t1 in zip(istart,istop):
+        plt.scatter(time[t0:t1+1], flux[t0:t1+1], c='r')
+    plt.show()
+
+    for x in range(3):
+        plt.scatter(time, flux)
+        plt.scatter(time[istart][x], flux[istart][x], c='r')
+        plt.scatter(time[istop][x], flux[istop][x], c='r')
+        plt.xlim(time[istart][x]-2.0, time[istop][x]+2.0)
+        plt.axvline((time[istart][x]+time[istop][x])/2, c='y')
+        plt.show()
+
+
