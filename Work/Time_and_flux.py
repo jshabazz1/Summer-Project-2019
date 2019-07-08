@@ -18,3 +18,5 @@ def gettimeflux_120(tic_id, sector):
         time = hdulist[1].data['TIME']
         flux = hdulist[1].data['PDCSAP_FLUX']
     return time, flux
+
+

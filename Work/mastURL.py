@@ -19,6 +19,7 @@ def gen_url(tic_id, sector, version = "v04"):  # Generates URL for TASOC data gi
     cadence = '1800'
     sub_dir = "ffi"
 
+
     url = "http://archive.stsci.edu/hlsps/tasoc/s000" + str(sector) + "/" + sub_dir + "/" \
           + tic_id_1[0:4] + "/" + tic_id_1[4:8] + "/" + tic_id_1[8:12] + "/" + tic_id_1[12:16] + "/" \
           + "hlsp_tasoc_tess_" + sub_dir + "_tic" + tic_id_2 + "-s0" + str(sector) + "-c" + cadence + "_tess_" \
