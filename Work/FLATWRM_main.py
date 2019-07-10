@@ -62,19 +62,20 @@ for this_id in ids:
         numFlares = len(istart)
 
 
-
+    except:
+        continue
         #plt.scatter(time, flux)
         #plt.show()
 
         #plt.scatter(time, flux, c='m')
-        plt.scatter(time[istart], flux[istart], c='b')
-        plt.scatter(time[istop], flux[istop], c='b')
-        plt.scatter(time, flux, c='k')
-        plt.suptitle("TIC " + this_id + " Sector "+sector +": Flare candidates")
-        plt.show
-        for t0,t1 in zip(istart,istop):
-            plt.scatter(time[t0:t1+1], flux[t0:t1+1], c='r')
-        plt.show()
+    plt.scatter(time[istart], flux[istart], c='b')
+    plt.scatter(time[istop], flux[istop], c='b')
+    plt.scatter(time, flux, c='k')
+    plt.suptitle("TIC " + this_id +": Flare candidates")
+    plt.show
+    for t0,t1 in zip(istart,istop):
+        plt.scatter(time[t0:t1+1], flux[t0:t1+1], c='r')
+    plt.show()
 
         #fig, axs = plt.subplots(2, numFlares)
         #for x in range(numFlares):
@@ -85,7 +86,3 @@ for this_id in ids:
                 #plt[i].xlim(time[istart][x]-2.0, time[istop][x]+2.0)
                 #plt[i].axvline((time[istart][x]+time[istop][x])/2, c='y')
                 #plt[i].show()
-    except:
-        pass
-
-
