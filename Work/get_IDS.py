@@ -1,4 +1,5 @@
 from astroquery.mast import Catalogs
+from astropy.table import Table
 
 
 def get_IDS (number):
@@ -7,8 +8,8 @@ def get_IDS (number):
     catalogTIC = catalogTIC[catalogTIC['dec'] < 0]
     return catalogTIC['ID'][:number]
 
+guenther_flares = Table.read("publication_catalog_per_flare_rdx.csv",format='ascii')
+guenther_flares['tic_id'].astype(str)
 
-
-
-
+print(guenther_flares['tic_id'].astype(str))
 

@@ -655,7 +655,7 @@ if __name__ == "__main__":
 		GenerateOutput(time,flux,istart,istop,period,\
 					   fit_events=fit_events,degree=degree,debug=debug,outputfile=outfile)
 
-		#In case there are more input files, reinitalize:
+		#In case there are more input files, reinitialize:
 		outfile = ""
 		period=0.
 		degree=0
