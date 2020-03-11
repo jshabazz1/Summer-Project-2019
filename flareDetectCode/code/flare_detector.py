@@ -16,24 +16,24 @@ debug = False
 noplot = False
 fit_events = True
 magnitude = False
-flarepoints = 3
-sigma = 5
+flarepoints = 4
+sigma = 8
 period=0.
 degree=0
 fwhm = 0.
 
 
-#ids = get_IDS(0,300)
+# ids = get_IDS(301, 1500)
 
-guenther_flares = Table.read("/Users/jshabazz/Work/textfiles/guenther_flares.csv",format='ascii')
-ids = guenther_flares['tic_id'][201:400].astype(str)
+guenther_flares = Table.read("/Users/jshabazz/flareDetectCode/textfiles/guenther_flares.csv",format='ascii')
+ids = guenther_flares['tic_id'][0:760].astype(str)
 
 #ids = ['141914082']
 # with open("manifest_firstdraft.csv","w", newline='') as f:
 #     fieldnames = ['TIC', 'Sector','Plot 1', 'Plot 2', 'Teff', 'Tmag', 'log(g)','CCD', 'Camera']
 #     writer = csv.DictWriter(f, fieldnames=fieldnames)
 #     writer.writeheader()
-with open("test.csv", "w") as ofile, open("test1.csv","w", newline='') as f:
+with open("test.csv", "w") as ofile, open("/Users/jshabazz/flareDetectCode/textfiles/manifest_guenther_1.csv","w", newline='') as f:
     # fieldnames = ['TIC_ID', 'Start_time', 'Stop_time', 'Start_flux', 'Stop_flux']
     # ofile.write(",".join(fieldnames)+'\n')
     fieldnames = ['TIC', 'Sector','Plot 1', 'Plot 2', 'Teff', 'Tmag', 'log(g)','CCD', 'Camera']
@@ -71,7 +71,7 @@ with open("test.csv", "w") as ofile, open("test1.csv","w", newline='') as f:
                                    debug=debug)
            
             flatwrm.GenerateOutput(time, flux, istart, istop, period, this_id, \
-                           fit_events=fit_events, degree=degree, debug=debug, outputfile=ofile)
+                           fit_events=fit_events, degree=degree, debug=debug, outputfile="")
 
             #save out put in readme text file
 
@@ -97,9 +97,11 @@ with open("test.csv", "w") as ofile, open("test1.csv","w", newline='') as f:
             ax.scatter(time[istart], flux[istart], c = 'm')
             ax.scatter(time[istop], flux[istop], c = 'm')
             figs.suptitle("TIC " + this_id + ": Flare candidates")
+            ax.set_xlabel('Time (TBJD)')
+            ax.set_ylabel('Flux ')
             for t0, t1 in zip(istart, istop):
                 ax.scatter(time[t0:t1+1], flux[t0:t1+1], c='m')
-            plt.savefig('/Users/jshabazz/Work/lightcurves/' + this_id + '.jpg', bbox_inches='tight')
+            plt.savefig('/Users/jshabazz/Work/guenther_flares_2/' + this_id + '.jpg', bbox_inches='tight')
             #plt.show()
 
 
@@ -117,7 +119,7 @@ with open("test.csv", "w") as ofile, open("test1.csv","w", newline='') as f:
                 axs[i//2, i%2].set_xlim(time[t2]-0.5, time[t3]+0.5)
                 #axs[i//2, i%2].set_ylim(flux[t2], flux[t3]+50.0)
                 axs[i//2, i%2].set_title(f'Flare candidate: {i+1}')
-            plt.savefig('/Users/jshabazz/Work/lightcurves/' + this_id + '_flares.jpg', bbox_inches='tight')
+            plt.savefig('/Users/jshabazz/Work/guenther_flares_2/' + this_id + '_flares.jpg', bbox_inches='tight')
             #plt.show()
             writer.writerow({'TIC': this_id, 
                             'Plot 1': this_id + '.jpg', 
